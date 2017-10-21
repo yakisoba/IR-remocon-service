@@ -47,7 +47,7 @@ void handlePower() {
 }
 
 void handleRoot() {
-  char temp[800];
+  char temp[2048];
   int sec = millis() / 1000;
   int min = sec / 60;
   int hr = min / 60;
@@ -141,26 +141,62 @@ void handleRoot() {
 
 "<html>\
   <head>\
-    <title>ESPr IR Demo</title>\
+    <title>Home IR-Remocon</title>\
     <style>\
       body { background-color: #cccccc; font-family: Arial, Helvetica, Sans-Serif; Color: #000088; }\
+      form { display: flex; flex-flow: row wrap; }\
+      input[type=submit] { flex: 0 100px; padding: 15px 40px; }\
     </style>\
   </head>\
   <body>\
-    <h1>ESPr IR DEMO</h1>\
+    <h1>Home IR-Remocon</h1>\
     <p>Uptime: %02d:%02d:%02d</p>\
     <p>BUTTON :%s</p>\
+    <h3>TV Remocon</h3>\
+    <h4>system</h4>\
     <form action=\"/\" method=\"post\">\
-      <input type=\"submit\" name=\"button1\" value=\"Power\" style=\"width:30%; height:100px\">\
-      <input type=\"submit\" name=\"button2\" value=\"Vol UP\" style=\"width:30%; height:100px\">\
-      <input type=\"submit\" name=\"button3\" value=\"Vol Down\" style=\"width:30%; height:100px\">\
+      <input type=\"submit\" name=\"button_power\" value=\"Power\">\
+      <input type=\"submit\" name=\"button_ok\" value=\"Ok\">\
+      <input type=\"submit\" name=\"button_input\" value=\"Input\">\
+      <input type=\"submit\" name=\"button_back\" value=\"Back\">\
+      <input type=\"submit\" name=\"button_end\" value=\"End\">\
+      <input type=\"submit\" name=\"button_data\" value=\"Data\">\
+      <input type=\"submit\" name=\"button_tool\" value=\"Tool\">\
+      <input type=\"submit\" name=\"button_search\" value=\"Search\">\
+    </form>\
+    <h4>channel</h4>\
+    <form action=\"/\" method=\"post\">\
+      <input type=\"submit\" name=\"button_1ch\" value=\"1ch\">\
+      <input type=\"submit\" name=\"button_2ch\" value=\"2ch\">\
+      <input type=\"submit\" name=\"button_3ch\" value=\"3ch\">\
+      <input type=\"submit\" name=\"button_4ch\" value=\"4ch\">\
+      <input type=\"submit\" name=\"button_5ch\" value=\"5ch\">\
+      <input type=\"submit\" name=\"button_6ch\" value=\"6ch\">\
+      <input type=\"submit\" name=\"button_7ch\" value=\"7ch\">\
+      <input type=\"submit\" name=\"button_8ch\" value=\"8ch\">\
+      <input type=\"submit\" name=\"button_9ch\" value=\"9ch\">\
+      <input type=\"submit\" name=\"button_10ch\" value=\"10ch\">\
+      <input type=\"submit\" name=\"button_11ch\" value=\"11ch\">\
+      <input type=\"submit\" name=\"button_12ch\" value=\"12ch\">\
+    </form>\
+    <h4>color</h4>\
+    <form action=\"/\" method=\"post\">\
+      <input type=\"submit\" name=\"button_blue\" value=\"Blue\">\
+      <input type=\"submit\" name=\"button_red\" value=\"Red\">\
+      <input type=\"submit\" name=\"button_green\" value=\"Green\">\
+      <input type=\"submit\" name=\"button_yellow\" value=\"Yellow\">\
+    </form>\
+    <h4>direction</h4>\
+    <form action=\"/\" method=\"post\">\
+      <input type=\"submit\" name=\"button_up\" value=\"Up\">\
+      <input type=\"submit\" name=\"button_down\" value=\"Down\">\
+      <input type=\"submit\" name=\"button_left\" value=\"Left\">\
+      <input type=\"submit\" name=\"button_right\" value=\"Right\">\
     </form>\
   </body>\
 </html>",
+    hr, min % 60, sec % 60, message);
 
-    hr, min % 60, sec % 60 ,message
-    
-  );
   server.send ( 200, "text/html", temp );
 }
 
