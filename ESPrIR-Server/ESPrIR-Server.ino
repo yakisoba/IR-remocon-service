@@ -5,8 +5,8 @@
 #include <ESP8266mDNS.h>
 #include <IRremoteESP8266.h>
 
-const char *ssid = "...";
-const char *password = "...";
+const char *ssid = "";
+const char *password = "";
 
 ESP8266WebServer server ( 80 );
 IRsend irsend(14);
@@ -29,6 +29,7 @@ void setup() {
   Serial.println(WiFi.localIP());
 
   server.on("/",handleRoot);
+  server.on("/power", handlePower);
   server.onNotFound(handleNotFound);
   server.begin();
   Serial.println("HTTP server started");
@@ -36,6 +37,13 @@ void setup() {
 
 void loop() {
   server.handleClient();
+}
+
+void handlePower() {
+  Serial.println("Power");
+  irsend.sendPanasonic(0x555A,0xF148688B); delay(10);
+  irsend.sendPanasonic(0x555A,0xF148688B);
+  server.send(204);
 }
 
 void handleRoot() {
