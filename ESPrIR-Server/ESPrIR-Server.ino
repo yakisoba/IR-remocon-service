@@ -49,14 +49,84 @@ void handleRoot() {
   String type = String(server.arg(0));
   Serial.println(type);
 
+  // system
   if (type.equals("Power")) {
+    irsend.sendPanasonic(0x555A,0xF148688B); delay(10);
     irsend.sendPanasonic(0x555A,0xF148688B);
-    delay(10);
-    irsend.sendPanasonic(0x555A,0xF148688B);
+  } else if (type.equals("Ok")) {
+    irsend.sendPanasonic(0x555A,0xF1484A8B);
+  } else if (type.equals("Back")) {
+    irsend.sendPanasonic(0x555A,0xF1482780);
+  } else if (type.equals("End")) {
+    irsend.sendPanasonic(0x555A,0xF148AF80);
+  } else if (type.equals("Input")) {
+    irsend.sendPanasonic(0x555A,0xF148C881);
+  } else if (type.equals("Data")) {
+    irsend.sendPanasonic(0x555A,0xF1487A44);
+  } else if (type.equals("Tool")) {
+    irsend.sendPanasonic(0x555A,0xF1483D47);
+  } else if (type.equals("Search")) {
+    irsend.sendPanasonic(0x555A,0xF148D94D);
+
+  // TV List
+  } else if (type.equals("TV List")) {
+    irsend.sendPanasonic(0x555A,0xF148064F);
+  } else if (type.equals("Comp TV List")) {
+    irsend.sendPanasonic(0x555A,0xF148AE4D);
+
+  // channel
+  } else if (type.equals("1ch")) {
+    irsend.sendPanasonic(0x555A,0xF148724C);
+  } else if (type.equals("2ch")) {
+    irsend.sendPanasonic(0x555A,0xF148F244);
+  } else if (type.equals("3ch")) {
+    irsend.sendPanasonic(0x555A,0xF1480A43);
+  } else if (type.equals("4ch")) {
+    irsend.sendPanasonic(0x555A,0xF1488A4B);
+  } else if (type.equals("5ch")) {
+    irsend.sendPanasonic(0x555A,0xF1484A47);
+  } else if (type.equals("6ch")) {
+    irsend.sendPanasonic(0x555A,0xF148CA4F);
+  } else if (type.equals("7ch")) {
+    irsend.sendPanasonic(0x555A,0xF1482A41);
+  } else if (type.equals("8ch")) {
+    irsend.sendPanasonic(0x555A,0xF148AA49);
+  } else if (type.equals("9ch")) {
+    irsend.sendPanasonic(0x555A,0xF1486A45);
+  } else if (type.equals("10ch")) {
+    irsend.sendPanasonic(0x555A,0xF148EA4D);
+  } else if (type.equals("11ch")) {
+    irsend.sendPanasonic(0x555A,0xF1481A42);
+  } else if (type.equals("12ch")) {
+    irsend.sendPanasonic(0x555A,0xF1489A4A);
+
+  // direction
+  } else if (type.equals("Up")) {
+    irsend.sendPanasonic(0x555A,0xF148EA81);
+  } else if (type.equals("Down")) {
+    irsend.sendPanasonic(0x555A,0xF1480481);
+  } else if (type.equals("Left")) {
+    irsend.sendPanasonic(0x555A,0xF148EB80);
+  } else if (type.equals("Right")) {
+    irsend.sendPanasonic(0x555A,0xF1481B8F);
+
+  // color (Unknown)
+  } else if (type.equals("Blue")) {
+    irsend.sendPanasonic(0x555A,0xF1480148);
+  } else if (type.equals("Red")) {
+    irsend.sendPanasonic(0x555A,0xF1488140);
+  } else if (type.equals("Green")) {
+    irsend.sendPanasonic(0x555A,0xF148414C);
+  } else if (type.equals("Yellow")) {
+    irsend.sendPanasonic(0x555A,0xF148C144);
+
+  // volume
   } else if (type.equals("Vol UP")) {
     irsend.sendPanasonic(0x555A,0xF148288F);
   } else if (type.equals("Vol Down")) {
     irsend.sendPanasonic(0x555A,0xF148A887);
+  } else if (type.equals("Mute")) {
+    irsend.sendPanasonic(0x555A,0xF148E883);
   }
   
   snprintf ( temp, 800,
