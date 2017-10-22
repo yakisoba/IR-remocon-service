@@ -60,6 +60,18 @@ void setup() {
   server.on("/tv/voldown", handleVolDown);
   server.on("/tv/mute", handleVolMute);
 
+  // recorder api
+  server.on("/rec/power", handleRecPower);
+  server.on("/rec/play", handlePlay);
+  server.on("/rec/stop", handleStop);
+  server.on("/rec/pause", handlePause);
+  server.on("/rec/prev", handlePrev);
+  server.on("/rec/next", handleNext);
+  server.on("/rec/forward", handleFF);
+  server.on("/rec/rewind", handleREW);
+  server.on("/rec/feed30s", handleFeed30s);
+  server.on("/rec/back10s", handleBack10s);
+
   server.onNotFound(handleNotFound);
   server.begin();
   Serial.println("HTTP server started");
@@ -207,6 +219,58 @@ void handleVolDown() {
 void handleVolMute() {
   Serial.println("Mute");
   irsend.sendPanasonic(0x555A,0xF148E883);
+  server.send(204);
+}
+
+// recorder
+void handleRecPower() {
+  Serial.println("Rec Power");
+  irsend.sendPanasonic(0x555A,0xF10C828F);
+  server.send(204);
+}
+void handlePlay() {
+  Serial.println("Play");
+  irsend.sendPanasonic(0x555A,0xF10C6487);
+  server.send(204);
+}
+void handlePause() {
+  Serial.println("Pause");
+  irsend.sendPanasonic(0x555A,0xF10C5484);
+  server.send(204);
+}
+void handleStop() {
+  Serial.println("Stop");
+  irsend.sendPanasonic(0x555A,0xF10CE48F);
+  server.send(204);
+}
+void handlePrev() {
+  Serial.println("Prev");
+  irsend.sendPanasonic(0x555A,0xF10CB48A);
+  server.send(204);
+}
+void handleNext() {
+  Serial.println("Next");
+  irsend.sendPanasonic(0x555A,0xF10C7486);
+  server.send(204);
+}
+void handleFF() {
+  Serial.println("Fast-Forward");
+  irsend.sendPanasonic(0x555A,0xF10C0C89);
+  server.send(204);
+}
+void handleREW() {
+  Serial.println("Rewind");
+  irsend.sendPanasonic(0x555A,0xF10CF48E);
+  server.send(204);
+}
+void handleFeed30s() {
+  Serial.println("Feed 30sec");
+  irsend.sendPanasonic(0x555A,0xF10C5181);
+  server.send(204);
+}
+void handleBack10s() {
+  Serial.println("Back 10sec");
+  irsend.sendPanasonic(0x555A,0xF10C0D88);
   server.send(204);
 }
 
