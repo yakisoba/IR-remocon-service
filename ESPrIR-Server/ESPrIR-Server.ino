@@ -29,7 +29,37 @@ void setup() {
   Serial.println(WiFi.localIP());
 
   server.on("/",handleRoot);
-  server.on("/power", handlePower);
+
+  // system api
+  server.on("/tv/power", handlePower);
+  server.on("/tv/ok", handleOk);
+  server.on("/tv/back", handleBack);
+  server.on("/tv/end", handleEnd);
+  server.on("/tv/input", handleInput);
+  server.on("/tv/data", handleData);
+  server.on("/tv/tool", handleTool);
+  server.on("/tv/search", handleSearch);
+
+  // channel api
+  server.on("/tv/channel", handleChannel);
+
+  // direction
+  server.on("/tv/up", handleUp);
+  server.on("/tv/down", handleDown);
+  server.on("/tv/left", handleLeft);
+  server.on("/tv/right", handleRight);
+
+  // color api
+  server.on("/tv/blue", handleBlue);
+  server.on("/tv/red", handleRed);
+  server.on("/tv/green", handleGreen);
+  server.on("/tv/yellow", handleYellow);
+
+  // vol api
+  server.on("/tv/volup", handleVolUp);
+  server.on("/tv/voldown", handleVolDown);
+  server.on("/tv/mute", handleVolMute);
+
   server.onNotFound(handleNotFound);
   server.begin();
   Serial.println("HTTP server started");
@@ -43,6 +73,140 @@ void handlePower() {
   Serial.println("Power");
   irsend.sendPanasonic(0x555A,0xF148688B); delay(10);
   irsend.sendPanasonic(0x555A,0xF148688B);
+  server.send(204);
+}
+
+void handleOk() {
+  Serial.println("Ok");
+  irsend.sendPanasonic(0x555A,0xF1484A8B);
+  server.send(204);
+}
+
+void handleBack() {
+  Serial.println("Back");
+  irsend.sendPanasonic(0x555A,0xF1482780);
+  server.send(204);
+}
+
+void handleEnd() {
+  Serial.println("End");
+  irsend.sendPanasonic(0x555A,0xF148AF80);
+  server.send(204);
+}
+
+void handleInput() {
+  Serial.println("Input");
+  irsend.sendPanasonic(0x555A,0xF148C881);
+  server.send(204);
+}
+
+void handleData() {
+  Serial.println("Data");
+  irsend.sendPanasonic(0x555A,0xF1487A44);
+  server.send(204);
+}
+
+void handleTool() {
+  Serial.println("Tool");
+  irsend.sendPanasonic(0x555A,0xF1483D47);
+  server.send(204);
+}
+
+void handleSearch() {
+  Serial.println("Search");
+  irsend.sendPanasonic(0x555A,0xF148D94D);
+  server.send(204);
+}
+
+void handleChannel() {
+  String type = server.arg("ch");
+  Serial.println("Channel " + type);
+  if (type.equals("1ch")) {
+    irsend.sendPanasonic(0x555A,0xF148724C);
+  } else if (type.equals("2ch")) {
+    irsend.sendPanasonic(0x555A,0xF148F244);
+  } else if (type.equals("3ch")) {
+    irsend.sendPanasonic(0x555A,0xF1480A43);
+  } else if (type.equals("4ch")) {
+    irsend.sendPanasonic(0x555A,0xF1488A4B);
+  } else if (type.equals("5ch")) {
+    irsend.sendPanasonic(0x555A,0xF1484A47);
+  } else if (type.equals("6ch")) {
+    irsend.sendPanasonic(0x555A,0xF148CA4F);
+  } else if (type.equals("7ch")) {
+    irsend.sendPanasonic(0x555A,0xF1482A41);
+  } else if (type.equals("8ch")) {
+    irsend.sendPanasonic(0x555A,0xF148AA49);
+  } else if (type.equals("9ch")) {
+    irsend.sendPanasonic(0x555A,0xF1486A45);
+  } else if (type.equals("10ch")) {
+    irsend.sendPanasonic(0x555A,0xF148EA4D);
+  } else if (type.equals("11ch")) {
+    irsend.sendPanasonic(0x555A,0xF1481A42);
+  } else if (type.equals("12ch")) {
+    irsend.sendPanasonic(0x555A,0xF1489A4A);
+  }
+  server.send(204);
+}
+
+// direction
+void handleUp() {
+  Serial.println("Up");
+  irsend.sendPanasonic(0x555A,0xF148EA81);
+  server.send(204);
+}
+void handleDown() {
+  Serial.println("Down");
+  irsend.sendPanasonic(0x555A,0xF1480481);
+  server.send(204);
+}
+void handleLeft() {
+  Serial.println("Left");
+  irsend.sendPanasonic(0x555A,0xF148EB80);
+  server.send(204);
+}
+void handleRight() {
+  Serial.println("Right");
+  irsend.sendPanasonic(0x555A,0xF1481B8F);
+  server.send(204);
+}
+
+// color
+void handleBlue() {
+  Serial.println("Blue");
+  irsend.sendPanasonic(0x555A,0xF1480148);
+  server.send(204);
+}
+void handleRed() {
+  Serial.println("Red");
+  irsend.sendPanasonic(0x555A,0xF1488140);
+  server.send(204);
+}
+void handleGreen() {
+  Serial.println("Green");
+  irsend.sendPanasonic(0x555A,0xF148414C);
+  server.send(204);
+}
+void handleYellow() {
+  Serial.println("Yellow");
+  irsend.sendPanasonic(0x555A,0xF148C144);
+  server.send(204);
+}
+
+// vol
+void handleVolUp() {
+  Serial.println("VolUp");
+  irsend.sendPanasonic(0x555A,0xF148288F);
+  server.send(204);
+}
+void handleVolDown() {
+  Serial.println("VolDown");
+  irsend.sendPanasonic(0x555A,0xF148A887);
+  server.send(204);
+}
+void handleVolMute() {
+  Serial.println("Mute");
+  irsend.sendPanasonic(0x555A,0xF148E883);
   server.send(204);
 }
 
@@ -118,7 +282,7 @@ void handleRoot() {
   } else if (type.equals("Right")) {
     irsend.sendPanasonic(0x555A,0xF1481B8F);
 
-  // color (Unknown)
+  // color
   } else if (type.equals("Blue")) {
     irsend.sendPanasonic(0x555A,0xF1480148);
   } else if (type.equals("Red")) {
@@ -136,7 +300,7 @@ void handleRoot() {
   } else if (type.equals("Mute")) {
     irsend.sendPanasonic(0x555A,0xF148E883);
   }
-  
+
   snprintf ( temp, 800,
 
 "<html>\
